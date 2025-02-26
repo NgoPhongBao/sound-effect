@@ -1,0 +1,30 @@
+"use client";
+import { useSearchParams } from "next/navigation";
+import { SoundList, Categories } from "@/components";
+import { sounds } from "@/constants";
+import { Suspense } from "react";
+
+export default function TimKiemPage() {
+  return (
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Result />
+      </Suspense>
+
+      {/* Danh mục */}
+      <Categories className="mt-4" />
+
+      {/* Âm thanh viral */}
+      <SoundList title="Âm thanh viral" sounds={sounds} />
+
+      {/* Âm thanh mới */}
+      <SoundList title="Âm thanh mới" sounds={sounds} />
+    </>
+  );
+}
+
+const Result = () => {
+  const searchParams = useSearchParams();
+  const q = searchParams.get("q");
+  return <SoundList title={`Kết quả tìm kiếm: "${q}"`} sounds={[]} />;
+};
