@@ -10,7 +10,7 @@ export function Categories({
 }) {
   return (
     <section className={clsx("rounded-lg bg-white p-4 shadow-md", className)}>
-      <h2 className="font-semibold uppercase">Danh mục</h2>
+      <h2 className="font-semibold uppercase">Thể loại</h2>
       <div className="mt-4 flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
