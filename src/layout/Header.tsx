@@ -32,24 +32,18 @@ export default function Header() {
           "flex items-center justify-between bg-gray-800 px-4 py-3 text-white",
         )}
       >
-        <nav>
-          <ul className="flex items-center justify-center gap-4">
-            <li>
-              <Link href="/" className="flex items-end">
-                <Image
-                  src="/logo.png"
-                  alt="Logo"
-                  width={100}
-                  height={100}
-                  className="h-6 w-6 object-contain"
-                />
-                <span className="translate-y-[5px] hidden md:inline-block md:text-3xl leading-none font-bold">
-                  hoamthanh.com
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <Link href="/" className="flex items-end">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="h-6 w-6 object-contain"
+          />
+          <span className="hidden translate-y-[5px] leading-none font-bold md:inline-block md:text-3xl">
+            hoamthanh.com
+          </span>
+        </Link>
 
         <div className="relative mx-4 max-w-[400px] flex-1">
           <input
@@ -161,6 +155,15 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Thể loại
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/login"
+                className="block rounded-lg p-2 text-gray-800 hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Đăng nhập
               </Link>
             </li>
           </ul>

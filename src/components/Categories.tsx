@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Category } from "@/types";
+import Link from "next/link";
 
 export function Categories({
   className,
@@ -13,12 +14,13 @@ export function Categories({
       <h2 className="font-semibold uppercase">Thể loại</h2>
       <div className="mt-4 flex flex-wrap gap-2">
         {categories.map((category) => (
-          <button
+          <Link
             key={category.id}
-            className="rounded-full bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300"
+            href={`/the-loai/${category.id}`}
+            className="rounded-md bg-gray-200 px-3 py-1 text-sm hover:bg-gray-300"
           >
             {category.name}
-          </button>
+          </Link>
         ))}
       </div>
     </section>
