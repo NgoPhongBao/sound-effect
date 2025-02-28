@@ -64,13 +64,15 @@ export function Search({
       <div className="mt-4 flex flex-wrap gap-2">
         {categories.map((category) => {
           const isActive = searchQuery.theloai === category.id.toString();
+          let href = `${PATHS.searchResults}?${toQueryString({
+            ...searchQuery,
+            theloai: isActive ? "" : category.id.toString(),
+          })}`;
+
           return (
             <Link
               key={category.id}
-              href={`${PATHS.searchResults}?${toQueryString({
-                ...searchQuery,
-                theloai: category.id.toString(),
-              })}`}
+              href={href}
               className={clsx(
                 "rounded-md px-3 py-1 text-sm",
                 isActive

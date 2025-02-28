@@ -16,72 +16,68 @@ export default function TimKiemPage() {
     <>
       <Search className="mt-4" categories={categories} />
       <div className="mt-4">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Đang tải...</div>}>
           <section className="mt-4 rounded-lg bg-white p-4 shadow-md">
             <p className="font-semibold uppercase">Kết quả tìm kiếm</p>
             <div className="mt-2">
               {!!tukhoa && (
                 <div className="flex items-center gap-2">
                   Từ khoá: <p className="font-bold">{tukhoa}</p>
-                  {tukhoa && (
-                    <button
-                      onClick={() => {
-                        router.push(
-                          `${PATHS.searchResults}?${toQueryString({
-                            tukhoa,
-                          })}`,
-                        );
-                      }}
-                      className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
+                  <button
+                    onClick={() => {
+                      router.push(
+                        `${PATHS.searchResults}?${toQueryString({
+                          theloai,
+                        })}`,
+                      );
+                    }}
+                    className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-4 w-4"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-4 w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  )}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
                 </div>
               )}
               {!!theloai && (
                 <div className="flex items-center gap-2">
                   Thể loại: <p className="font-bold">{theloai}</p>
-                  {theloai && (
-                    <button
-                      onClick={() => {
-                        router.push(
-                          `${PATHS.searchResults}?${toQueryString({
-                            theloai,
-                          })}`,
-                        );
-                      }}
-                      className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
+                  <button
+                    onClick={() => {
+                      router.push(
+                        `${PATHS.searchResults}?${toQueryString({
+                          tukhoa,
+                        })}`,
+                      );
+                    }}
+                    className="rounded-full bg-gray-200 p-1 hover:bg-gray-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-4 w-4"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-4 w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  )}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
                 </div>
               )}
             </div>
