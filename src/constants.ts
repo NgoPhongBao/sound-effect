@@ -17,7 +17,7 @@ export const sounds: Sound[] = [
     plays: 890000,
     downloads: 120000,
     category: { id: 2, name: "Nhạc game" },
-    url: "/gophim.mp3",
+    url: "/whoosh.mp3",
   },
   {
     id: 3,
