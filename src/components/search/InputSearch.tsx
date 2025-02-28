@@ -7,7 +7,6 @@ import { PATHS } from "@/constants";
 import { SearchQuery } from "@/types";
 import { toQueryString } from "@/helpers";
 
-
 export function InputSearch({
   placeholder = "Tìm kiếm...",
   onSearch,
@@ -38,7 +37,10 @@ export function InputSearch({
       <input
         type="text"
         value={searchQuery.q || ""}
-        onChange={(e) => setSearchQuery({ ...searchQuery, q: e.target.value })}
+        onChange={(e) => {
+          setSearchQuery({ ...searchQuery, q: e.target.value });
+          setFocus(true);
+        }}
         placeholder={placeholder}
         className="w-full rounded-lg border border-gray-300 px-4 py-2 pr-10 focus:border-gray-500 focus:outline-none"
         onFocus={() => setFocus(true)}
@@ -46,12 +48,17 @@ export function InputSearch({
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             onSearch?.();
+            setFocus(false);
           }
         }}
       />
       <button
-        type="submit"
+        type="button"
         className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+        onClick={() => {
+          onSearch?.();
+          setFocus(false);
+        }}  
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +75,7 @@ export function InputSearch({
           />
         </svg>
       </button>
-      {!!overlay && focus && (
+      {/* {!!overlay && focus && (
         <div className="absolute -bottom-1 left-0 w-full translate-y-full rounded-lg bg-white text-center shadow-lg">
           <Link
             href={`${PATHS.searchResults}?${toQueryString(searchQuery)}`}
@@ -96,7 +103,7 @@ export function InputSearch({
             </button>
           </Link>
         </div>
-      )}
+      )} */}
     </form>
   );
 }
