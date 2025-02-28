@@ -7,6 +7,8 @@ export const sounds: Sound[] = [
     duration: "0:15",
     plays: 1500000,
     downloads: 250000,
+    category: { id: 1, name: "Nhạc nền" },
+    url: "/gophim.mp3",
   },
   {
     id: 2,
@@ -14,6 +16,8 @@ export const sounds: Sound[] = [
     duration: "0:30",
     plays: 890000,
     downloads: 120000,
+    category: { id: 2, name: "Nhạc game" },
+    url: "/gophim.mp3",
   },
   {
     id: 3,
@@ -21,6 +25,8 @@ export const sounds: Sound[] = [
     duration: "0:05",
     plays: 2100000,
     downloads: 450000,
+    category: { id: 3, name: "Âm thanh thiên nhiên" },
+    url: "/gophim.mp3",
   },
   {
     id: 4,
@@ -28,6 +34,8 @@ export const sounds: Sound[] = [
     duration: "0:20",
     plays: 750000,
     downloads: 95000,
+    category: { id: 4, name: "Tiếng động vật" },
+    url: "/gophim.mp3",
   },
 ];
 

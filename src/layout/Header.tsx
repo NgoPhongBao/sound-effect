@@ -58,7 +58,7 @@ export default function Header() {
           <input
             type="text"
             placeholder="Tìm kiếm âm thanh..."
-            className="w-full rounded-lg bg-gray-500 px-3 py-2 placeholder:text-gray-400 focus:ring-1 focus:ring-white focus:outline-none"
+            className="w-full rounded-lg bg-gray-500 px-3 py-2 placeholder:text-gray-300 focus:ring-1 focus:ring-white focus:outline-none"
             value={searchValue || ""}
             onChange={(e) => setSearchValue(e.target.value)}
             onKeyDown={(e) => {
@@ -67,8 +67,10 @@ export default function Header() {
               }
             }}
           />
-          <button
-            type="button"
+          <Link
+            href={`${PATHS.searchResults}?${toQueryString({
+              tukhoa: searchValue || "",
+            })}`}
             className="absolute top-1/2 right-3 -translate-y-1/2"
             aria-label="Search"
             onClick={() => handleSearch(searchValue || "")}
@@ -87,7 +89,7 @@ export default function Header() {
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
               />
             </svg>
-          </button>
+          </Link>
         </div>
 
         <button

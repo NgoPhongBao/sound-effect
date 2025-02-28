@@ -4,6 +4,8 @@ export interface Sound {
   duration: string;
   plays: number;
   downloads: number;
+  category: Category;
+  url: string;
 }
 
 export interface Category {

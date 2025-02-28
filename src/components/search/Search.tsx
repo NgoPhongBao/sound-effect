@@ -47,19 +47,6 @@ export function Search({
             })}`,
           );
         }}
-        overlay={
-          searchQuery.tukhoa
-            ? `Tìm kiếm "${searchQuery.tukhoa}" ${
-                searchQuery.theloai
-                  ? `cho thể loại "${
-                      categories.find(
-                        (c) => c.id === Number(searchQuery.theloai),
-                      )?.name
-                    }"`
-                  : ""
-              }`
-            : ""
-        }
       />
       <div className="mt-4 flex flex-wrap gap-2">
         {categories.map((category) => {

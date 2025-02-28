@@ -17,7 +17,7 @@ export function SoundList({ sounds, title }: SoundListProps) {
       </div>
       <div className="mt-4 text-center">
         <button className="rounded-lg bg-gray-100 px-3 py-1 hover:bg-gray-200">
-          View more
+          Xem thêm
         </button>
       </div>
     </section>
