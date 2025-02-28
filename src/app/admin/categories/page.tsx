@@ -1,6 +1,6 @@
 "use client";
 
-import { Categories, InputSearch, Pagination } from "@/components";
+import { InputSearch, Pagination } from "@/components";
 import { categories } from "@/constants";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ export default function CategoriesPage() {
   return (
     <>
       <div className="flex flex-wrap justify-between gap-4 sm:gap-6">
-        <InputSearch placeholder="Tìm kiếm thể loại..." className="flex-auto" />
+        {/* <InputSearch placeholder="Tìm kiếm thể loại..." className="flex-auto" /> */}
         <button
           className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           onClick={() => setIsOpen(true)}

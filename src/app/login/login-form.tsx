@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { login, signup } from "./actions";
+import { login } from "./actions";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -55,12 +55,12 @@ export default function Login() {
           >
             Login
           </button>
-          <button
+          {/* <button
             formAction={signup}
             className="w-full rounded-lg bg-gray-500 px-4 py-2 font-medium text-white hover:bg-gray-600 focus:outline-none"
           >
             Signup
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

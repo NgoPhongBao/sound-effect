@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { SoundList, Categories } from "@/components";
+import { SoundList, Search } from "@/components";
 import { sounds } from "@/constants";
 import { Suspense } from "react";
 import { categories } from "@/constants";
@@ -13,7 +13,7 @@ export default function TimKiemPage() {
       </Suspense>
 
       {/* Danh mục */}
-      <Categories className="mt-4" categories={categories} />
+      <Search className="mt-4" categories={categories} />
 
       {/* Âm thanh viral */}
       <SoundList title="Âm thanh viral" sounds={sounds} />

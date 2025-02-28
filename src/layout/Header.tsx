@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import { useDebounce } from "@uidotdev/usehooks";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-
+import { useAppContext } from "@/AppContext";
 export default function Header() {
   const router = useRouter();
+  const { user } = useAppContext();
   const [search, setSearch] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -142,7 +143,7 @@ export default function Header() {
             <li>
               <Link
                 href="/"
-                className="block rounded-lg p-2 text-gray-800 hover:bg-gray-100"
+                className="block rounded-lg p-2 hover:bg-gray-100"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Trang chủ
@@ -151,20 +152,42 @@ export default function Header() {
             <li>
               <Link
                 href="/the-loai"
-                className="block rounded-lg p-2 text-gray-800 hover:bg-gray-100"
+                className="block rounded-lg p-2 hover:bg-gray-100"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Thể loại
               </Link>
             </li>
+            {user && (
+              <li>
+                <Link
+                  href="/admin"
+                  className="block rounded-lg p-2 hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin
+                </Link>
+              </li>
+            )}
             <li>
-              <Link
-                href="/login"
-                className="block rounded-lg p-2 text-gray-800 hover:bg-gray-100"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Đăng nhập
-              </Link>
+              {user ? (
+                <form action="/auth/signout" method="post">
+                  <button
+                    className="inline-block rounded-lg bg-gray-500 px-3 py-2 text-white hover:bg-gray-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Đăng xuất
+                  </button>
+                </form>
+              ) : (
+                <Link
+                  href="/login"
+                  className="inline-block rounded-lg bg-gray-500 px-3 py-2 text-white hover:bg-gray-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Đăng nhập
+                </Link>
+              )}
             </li>
           </ul>
         </nav>
