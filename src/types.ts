@@ -1,4 +1,3 @@
-
 export interface Sound {
   id: number;
   title: string;
@@ -12,8 +11,14 @@ export interface Category {
   name: string;
 }
 
-
 export interface User {
   id: string;
   email?: string;
+}
+
+export interface SearchQuery {
+  q?: string;
+  category?: string;
+  isViral?: boolean;
+  isNew?: boolean;
 }

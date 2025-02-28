@@ -1,26 +1,33 @@
 "use client";
 import clsx from "clsx";
+import { useState } from "react";
 import { ReactNode } from "react";
 import Link from "next/link";
+import { PATHS } from "@/constants";
+import { SearchQuery } from "@/types";
+import { toQueryString } from "@/helpers";
+
 
 export function InputSearch({
   placeholder = "Tìm kiếm...",
   onSearch,
   className,
   overlay,
-  value,
-  setValue,
+  searchQuery,
+  setSearchQuery,
 }: {
   placeholder?: string;
-  onSearch?: (value: string) => void;
+  onSearch?: () => void;
   className?: string;
   overlay?: ReactNode;
-  value: string;
-  setValue: (value: string) => void;
+  searchQuery: SearchQuery;
+  setSearchQuery: (value: SearchQuery) => void;
 }) {
+  const [focus, setFocus] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch?.(value);
+    onSearch?.();
   };
 
   return (
@@ -30,10 +37,17 @@ export function InputSearch({
     >
       <input
         type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={searchQuery.q || ""}
+        onChange={(e) => setSearchQuery({ ...searchQuery, q: e.target.value })}
         placeholder={placeholder}
         className="w-full rounded-lg border border-gray-300 px-4 py-2 pr-10 focus:border-gray-500 focus:outline-none"
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onSearch?.();
+          }
+        }}
       />
       <button
         type="submit"
@@ -54,9 +68,12 @@ export function InputSearch({
           />
         </svg>
       </button>
-      {!!overlay && (
+      {!!overlay && focus && (
         <div className="absolute -bottom-1 left-0 w-full translate-y-full rounded-lg bg-white text-center shadow-lg">
-          <div className="flex w-full items-center justify-between p-4">
+          <Link
+            href={`${PATHS.searchResults}?${toQueryString(searchQuery)}`}
+            className="flex w-full items-center justify-between p-4 hover:bg-gray-50"
+          >
             <div className="flex gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +94,7 @@ export function InputSearch({
             <button className="rounded-md bg-gray-200 px-2 py-1 text-sm">
               ENTER
             </button>
-          </div>
+          </Link>
         </div>
       )}
     </form>
