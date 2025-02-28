@@ -43,3 +43,16 @@ export const categories: Category[] = [
   { id: 9, name: "Tiếng người" },
   { id: 10, name: "Âm thanh thể thao" },
 ];
+
+
+export const PATHS = {
+  home: "/",
+  searchResults: "/ket-qua-tim-kiem",
+  categories: "/the-loai",
+  login: "/login",
+  signup: "/signup",
+  account: "/account",
+  admin: "/admin",
+  adminCategories: "/admin/categories",
+  adminSounds: "/admin/sounds",
+};

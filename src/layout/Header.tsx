@@ -6,6 +6,8 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useAppContext } from "@/AppContext";
+import { PATHS } from "@/constants";
+
 export default function Header() {
   const router = useRouter();
   const { user } = useAppContext();
@@ -14,7 +16,7 @@ export default function Header() {
 
   const handleSearch = useCallback(
     (value: string) => {
-      router.push(`/tim-kiem?q=${value}`);
+      router.push(`${PATHS.searchResults}?q=${value}`);
     },
     [router],
   );
@@ -161,7 +163,7 @@ export default function Header() {
             {user && (
               <li>
                 <Link
-                  href="/admin"
+                  href={PATHS.admin}
                   className="block rounded-lg p-2 hover:bg-gray-100"
                   onClick={() => setIsMenuOpen(false)}
                 >

@@ -1,6 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { ReactNode } from "react";
+import Link from "next/link";
 
 export function InputSearch({
   placeholder = "Tìm kiếm...",
@@ -73,7 +74,9 @@ export function InputSearch({
               </svg>
               {overlay}
             </div>
-            <button className="text-gray-400 hover:text-gray-600">ENTER</button>
+            <button className="rounded-md bg-gray-200 px-2 py-1 text-sm">
+              ENTER
+            </button>
           </div>
         </div>
       )}

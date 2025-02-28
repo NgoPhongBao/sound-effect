@@ -2,9 +2,8 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-
 import { createClientServerSide } from '@/supabase/server'
-
+import { PATHS } from '@/constants'
 export async function login(formData: FormData) {
   const supabase = await createClientServerSide()
 
@@ -22,7 +21,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/admin')
+  redirect(PATHS.admin)
 }
 
 export async function signup(formData: FormData) {
@@ -42,5 +41,5 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/admin')
+  redirect(PATHS.admin)
 }
