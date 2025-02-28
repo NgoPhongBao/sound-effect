@@ -29,7 +29,7 @@ export function InputSearch({
   return (
     <form
       onSubmit={handleSubmit}
-      className={clsx("shadow-md", className)}
+      className={clsx("relative shadow-md", className)}
     >
       <input
         type="text"

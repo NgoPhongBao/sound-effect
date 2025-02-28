@@ -54,26 +54,48 @@ export default function Header() {
           </span>
         </Link>
 
-        <div className="relative mx-4 max-w-[400px] flex-1">
-          <input
-            type="text"
-            placeholder="Tìm kiếm âm thanh..."
-            className="w-full rounded-lg bg-gray-500 px-3 py-2 placeholder:text-gray-300 focus:ring-1 focus:ring-white focus:outline-none"
-            value={searchValue || ""}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch(searchValue || "");
-              }
-            }}
-          />
-          <Link
-            href={`${PATHS.searchResults}?${toQueryString({
-              tukhoa: searchValue || "",
-            })}`}
-            className="absolute top-1/2 right-3 -translate-y-1/2"
-            aria-label="Search"
-            onClick={() => handleSearch(searchValue || "")}
+        <div className="flex items-center gap-2">
+          <div className="relative mx-4 w-[250px] max-w-[400px] flex-1">
+            <input
+              type="text"
+              placeholder="Tìm kiếm âm thanh..."
+              className="w-full rounded-lg bg-gray-500 px-3 py-2 placeholder:text-gray-300 focus:ring-1 focus:ring-white focus:outline-none"
+              value={searchValue || ""}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch(searchValue || "");
+                }
+              }}
+            />
+            <Link
+              href={`${PATHS.searchResults}?${toQueryString({
+                tukhoa: searchValue || "",
+              })}`}
+              className="absolute top-1/2 right-3 -translate-y-1/2"
+              aria-label="Search"
+              onClick={() => handleSearch(searchValue || "")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </Link>
+          </div>
+
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="hover:text-gray-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -86,37 +108,17 @@ export default function Header() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
               />
             </svg>
-          </Link>
+          </button>
         </div>
-
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="hover:text-gray-300"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
-        </button>
       </header>
 
       {/* Overlay */}
       <div
         className={clsx(
-          "fixed inset-0 bg-black/50 transition-opacity",
+          "fixed inset-0 z-10 bg-black/50 transition-opacity",
           isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
         onClick={() => setIsMenuOpen(false)}
@@ -125,7 +127,7 @@ export default function Header() {
       {/* Sidebar */}
       <div
         className={clsx(
-          "fixed top-0 right-0 h-full w-full max-w-[400px] bg-white transition-transform",
+          "fixed top-0 right-0 z-20 h-full w-full max-w-[400px] bg-white transition-transform",
           isMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
