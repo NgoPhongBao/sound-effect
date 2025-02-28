@@ -17,8 +17,8 @@ export interface User {
 }
 
 export interface SearchQuery {
-  q?: string;
-  category?: string;
-  isViral?: boolean;
-  isNew?: boolean;
+  tukhoa?: string;
+  theloai?: string;
+  viral?: boolean;
+  moi?: boolean;
 }

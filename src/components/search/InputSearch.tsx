@@ -2,13 +2,10 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { ReactNode } from "react";
-import Link from "next/link";
-import { PATHS } from "@/constants";
 import { SearchQuery } from "@/types";
-import { toQueryString } from "@/helpers";
 
 export function InputSearch({
-  placeholder = "Tìm kiếm...",
+  placeholder = "Tìm kiếm âm thanh...",
   onSearch,
   className,
   overlay,
@@ -36,9 +33,9 @@ export function InputSearch({
     >
       <input
         type="text"
-        value={searchQuery.q || ""}
+        value={searchQuery.tukhoa || ""}
         onChange={(e) => {
-          setSearchQuery({ ...searchQuery, q: e.target.value });
+          setSearchQuery({ ...searchQuery, tukhoa: e.target.value });
           setFocus(true);
         }}
         placeholder={placeholder}

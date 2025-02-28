@@ -3,13 +3,12 @@ import clsx from "clsx";
 import { Category, SearchQuery } from "@/types";
 import Link from "next/link";
 import { InputSearch } from "./InputSearch";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { PATHS } from "@/constants";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { toQueryString } from "@/helpers";
-import { SoundItem } from "@/components/SoundItem";
-import { sounds } from "@/constants";
 import { useRouter } from "next/navigation";
+
 export function Search({
   className,
   categories,
@@ -20,16 +19,14 @@ export function Search({
   const searchParams = useSearchParams();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState<SearchQuery>({
-    q: "",
-    category: "",
+    tukhoa: "",
+    theloai: "",
   });
-
-  const isSearchResultsPage = usePathname() === PATHS.searchResults;
 
   useEffect(() => {
     setSearchQuery({
-      q: searchParams.get("q") || "",
-      category: searchParams.get("category") || "",
+      tukhoa: searchParams.get("tukhoa") || "",
+      theloai: searchParams.get("theloai") || "",
     });
   }, [searchParams]);
 
@@ -51,12 +48,12 @@ export function Search({
           );
         }}
         overlay={
-          searchQuery.q
-            ? `Tìm kiếm "${searchQuery.q}" ${
-                searchQuery.category
+          searchQuery.tukhoa
+            ? `Tìm kiếm "${searchQuery.tukhoa}" ${
+                searchQuery.theloai
                   ? `cho thể loại "${
                       categories.find(
-                        (c) => c.id === Number(searchQuery.category),
+                        (c) => c.id === Number(searchQuery.theloai),
                       )?.name
                     }"`
                   : ""
@@ -66,13 +63,13 @@ export function Search({
       />
       <div className="mt-4 flex flex-wrap gap-2">
         {categories.map((category) => {
-          const isActive = searchQuery.category === category.id.toString();
+          const isActive = searchQuery.theloai === category.id.toString();
           return (
             <Link
               key={category.id}
               href={`${PATHS.searchResults}?${toQueryString({
                 ...searchQuery,
-                category: category.id.toString(),
+                theloai: category.id.toString(),
               })}`}
               className={clsx(
                 "rounded-md px-3 py-1 text-sm",
@@ -86,26 +83,6 @@ export function Search({
           );
         })}
       </div>
-
-      {isSearchResultsPage && (
-        <div className="mt-8">
-          <Suspense fallback={<div>Loading...</div>}>
-            <h2 className={clsx("font-semibold uppercase")}>
-              {`Kết quả tìm kiếm: "${searchParams.get("q")}"`}
-            </h2>
-
-            <div className="mt-4 flex flex-col justify-center gap-2">
-              {sounds.map((sound) => (
-                <SoundItem key={sound.id} sound={sound} />
-              ))}
-            </div>
-
-            <p className="py-10 text-center text-gray-500">
-              Không có kết quả tìm kiếm
-            </p>
-          </Suspense>
-        </div>
-      )}
     </section>
   );
 }
