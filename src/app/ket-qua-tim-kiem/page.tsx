@@ -1,6 +1,7 @@
 import SeacrhResult from "./SeacrhResult";
 import { createClientServerSide } from "@/supabase/server";
-import { PAGE_SIZE } from "@/constants";
+import { PAGE_SIZE, PATHS } from "@/constants";
+import { SoundList } from "@/components";
 export default async function TimKiemPage({
   searchParams,
 }: {
@@ -27,6 +28,27 @@ export default async function TimKiemPage({
         .ilike("title", `%${tukhoa || ""}%`)
         .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
 
+  return (
+    <>
+      <SeacrhResult sounds={sounds || []} count={count || 0} />
 
-  return <SeacrhResult sounds={sounds || []} count={count || 0} />;
+      {sounds && sounds.length === 0 && (
+        <>
+          {/* Âm thanh viral */}
+          <SoundList
+            title="Âm thanh viral"
+            sounds={sounds || []}
+            link={PATHS.viral}
+          />
+
+          {/* Âm thanh mới */}
+          <SoundList
+            title="Âm thanh mới"
+            sounds={sounds || []}
+            link={PATHS.new}
+          />
+        </>
+      )}
+    </>
+  );
 }

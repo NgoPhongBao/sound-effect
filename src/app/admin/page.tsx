@@ -5,11 +5,11 @@ import { redirect } from "next/navigation";
 export default function AdminPage() {
   const { user } = useAppContext();
 
-  useEffect(() => {
-    if (!user) {
-      redirect("/login");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     redirect("/login");
+  //   }
+  // }, [user]);
 
   return (
     <div>

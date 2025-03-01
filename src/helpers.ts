@@ -1,3 +1,5 @@
+import { createClientBrowserSide } from "@/supabase/client";
+
 export const toQueryString = (obj: Record<string, any>) => {
   return Object.entries(obj)
     .filter(([_, value]) => value !== "" && value != null)
@@ -17,3 +19,10 @@ export function formatTime(seconds: number) {
       : remainingSeconds.toString()
   }`;
 }
+
+
+export const getFile = async (path: string) => {
+  const supabase = await createClientBrowserSide();
+  const { data, error } = await supabase.storage.from("sounds").download(path);
+  return new File([data!], path, { type: "audio/mpeg" });
+};

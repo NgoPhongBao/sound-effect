@@ -38,5 +38,4 @@ with check (true);
 -- Allow authenticated users to delete categories
 create policy "Enable delete for authenticated users only" 
 on categories for delete
-to authenticated
-using (true);
+using (auth.uid() is not null);

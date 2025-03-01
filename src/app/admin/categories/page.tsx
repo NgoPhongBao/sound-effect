@@ -182,13 +182,13 @@ function CreateCategoryForm({
 
   return (
     <div className="bg-opacity-50 fixed inset-0 flex items-center justify-center bg-black/[30%]">
-      <div className="w-full max-w-md rounded-lg bg-white p-6">
+      <div className="w-full max-w-md rounded-lg bg-white p-6 text-sm">
         <h2 className="mb-4 text-xl font-semibold">
           {categoryEdit ? "Chỉnh sửa thể loại" : "Thêm thể loại mới"}
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="mb-2 block text-sm font-medium">
+            <label htmlFor="name" className="mb-2 block font-medium">
               Tên thể loại<span className="text-red-500">*</span>
             </label>
             <input
@@ -202,10 +202,7 @@ function CreateCategoryForm({
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="priority"
-              className="mb-2 block text-sm font-medium"
-            >
+            <label htmlFor="priority" className="mb-2 block font-medium">
               Ưu tiên<span className="text-red-500">*</span>
             </label>
             <input
@@ -225,14 +222,14 @@ function CreateCategoryForm({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300"
+              className="rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
             >
               Hủy
             </button>
             <button
               type="submit"
               className={clsx(
-                "rounded-lg px-4 py-2 text-sm text-white",
+                "rounded-lg px-4 py-2 text-white",
                 categoryEdit
                   ? "bg-blue-500 hover:bg-blue-600"
                   : "bg-green-500 hover:bg-green-600",

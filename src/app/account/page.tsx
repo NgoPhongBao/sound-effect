@@ -115,7 +115,7 @@ export default function AccountPage() {
         <label htmlFor="website">Website</label>
         <input
           id="website"
-          type="url"
+          type="path"
           value={website || ""}
           onChange={(e) => setWebsite(e.target.value)}
           className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none"

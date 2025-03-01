@@ -4,8 +4,8 @@ export interface Sound {
   duration: number;
   plays: number;
   downloads: number;
-  category: number;
-  url: string;
+  category_id: number;
+  path: string;
   created_at: string;
   updated_at: string;
   is_deleted: boolean;

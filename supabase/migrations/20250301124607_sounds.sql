@@ -7,7 +7,7 @@ create table sounds (
   plays int not null,
   downloads int not null,
   category_id bigint not null,
-  url text not null,
+  path text not null,
   created_at timestamp with time zone default now() not null,
   updated_at timestamp with time zone default now() not null,
   is_deleted boolean default false not null,
@@ -17,7 +17,7 @@ create table sounds (
 );
 
 -- Insert some sample data into the table
-insert into sounds (title, duration, plays, downloads, category_id, url, is_deleted, is_viral, is_trending, is_new)
+insert into sounds (title, duration, plays, downloads, category_id, path, is_deleted, is_viral, is_trending, is_new)
 values
   ('Sound 1', 100, 1000, 100, 1, 'https://example.com/sound1.mp3', false, false, false, false),
   ('Sound 2', 200, 2000, 200, 2, 'https://example.com/sound2.mp3', false, false, false, false);
@@ -46,4 +46,4 @@ with check (true);
 create policy "Enable delete for authenticated users only" 
 on sounds for delete 
 to authenticated 
-using (true);
+using (auth.uid() is not null);
