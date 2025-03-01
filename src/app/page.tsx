@@ -1,12 +1,11 @@
 import { SoundList, Search } from "@/components";
-import { sounds } from "@/constants";
-import { createClientBrowserSide } from "@/supabase/client";
+import { createClientServerSide } from "@/supabase/server";
 import { PATHS } from "@/constants";
 
 export default async function Home() {
-  const supabase = await createClientBrowserSide();
+  const supabase = await createClientServerSide();
   const { data: categories } = await supabase.from("categories").select();
-  console.log(categories);
+  const { data: sounds } = await supabase.from("sounds").select();
 
   return (
     <>
@@ -14,10 +13,10 @@ export default async function Home() {
       <Search categories={categories || []} />
 
       {/* Âm thanh viral */}
-      <SoundList title="Âm thanh viral" sounds={sounds} link={PATHS.viral} />
+      <SoundList title="Âm thanh viral" sounds={sounds || []} link={PATHS.viral} />
 
       {/* Âm thanh mới */}
-      <SoundList title="Âm thanh mới" sounds={sounds} link={PATHS.new} />
+      <SoundList title="Âm thanh mới" sounds={sounds || []} link={PATHS.new} />
     </>
   );
 }

@@ -23,6 +23,8 @@ export interface Category {
   updated_at: string;
 }
 
+export interface CategoryUpdatePayload extends Partial<Category> {}
+
 export interface User {
   id: string;
   email?: string;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PATHS } from "@/constants";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function AdminLayout({
   children,
@@ -46,6 +47,12 @@ export default function AdminLayout({
         ))}
       </div>
       <div className="mt-4">{children}</div>
+      <ToastContainer
+        autoClose={1000}
+        hideProgressBar={true}
+        closeOnClick
+        theme="light"
+      />
     </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { Search, SoundItem } from "@/components";
-import { sounds, categories, PATHS } from "@/constants";
+import {  PATHS } from "@/constants";
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { toQueryString } from "@/helpers";
@@ -14,7 +14,7 @@ export default function TimKiemPage() {
   const router = useRouter();
   return (
     <>
-      <Search className="mt-4" categories={categories} />
+      <Search className="mt-4" categories={[]} />
       <div className="mt-4">
         <Suspense fallback={<div>Đang tải...</div>}>
           <section className="mt-4 rounded-lg bg-white p-4 shadow-md">
@@ -83,9 +83,9 @@ export default function TimKiemPage() {
             </div>
 
             <div className="mt-4 space-y-2">
-              {sounds.map((sound) => (
+              {/* {[].map((sound) => (
                 <SoundItem key={sound.id} sound={sound} />
-              ))}
+              ))} */}
             </div>
             <Pagination pageCount={10} />
           </section>
