@@ -1,21 +1,21 @@
 "use client";
 import { Sound } from "@/types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { useAudioStore } from "@/stores";
+import { formatTime } from "@/helpers";
+
 export function SoundItem({ sound }: { sound: Sound }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const { audio: audioStored, setAudio } = useAudioStore();
+  const { audio: audioStored, setAudio: setAudioStored } = useAudioStore();
+  const audioId = useId();
 
   useEffect(() => {
     if (audioStored) {
+      setCurrentTime(0);
       audioStored.play();
       audioStored.addEventListener("timeupdate", () => {
         setCurrentTime(audioStored.currentTime);
-      });
-      audioStored.addEventListener("durationchange", () => {
-        setDuration(audioStored.duration);
       });
       audioStored.addEventListener("play", () => {
         setIsPlaying(true);
@@ -27,6 +27,12 @@ export function SoundItem({ sound }: { sound: Sound }) {
         setIsPlaying(false);
       });
     }
+    return () => {
+      if (audioStored && !audioStored.paused) {
+        audioStored.pause();
+        setAudioStored(null);
+      }
+    };
   }, [audioStored]);
 
   return (
@@ -35,41 +41,50 @@ export function SoundItem({ sound }: { sound: Sound }) {
       <div>
         <h3 className="font-medium">{sound.title}</h3>
         <p className="text-sm text-gray-500">
-          {sound.duration} • {sound.downloads.toLocaleString()} downloads
+          {formatTime(sound.duration)} • {sound.downloads.toLocaleString()} lượt
+          tải
         </p>
         <div className="mt-1 flex items-center gap-2">
-          <div className="h-1 flex-1 rounded-full bg-gray-200">
+          <div className="h-1 w-[110px] rounded-full bg-gray-200">
             <div
               className="h-full rounded-full bg-gray-800 transition-all duration-200"
-              style={{ width: `${(currentTime / duration) * 100}%` }}
+              style={{
+                width:
+                  audioStored?.id === audioId
+                    ? `${(currentTime / sound.duration) * 100}%`
+                    : "0%",
+              }}
             />
           </div>
           <span className="text-xs text-gray-500">
-            {audioStored?.id === sound.id.toString()
-              ? `${currentTime.toFixed(2)}/${duration.toFixed(2)}`
-              : `00/${sound.duration}`}
+            {audioStored?.id === audioId
+              ? `${formatTime(currentTime)}/${formatTime(sound.duration)}`
+              : `00/${formatTime(sound.duration)}`}
           </span>
         </div>
       </div>
 
       {/* action buttons */}
       <div className="flex gap-2">
-        {(audioStored?.id !== sound.id.toString() ||
-          (audioStored?.id === sound.id.toString() && !isPlaying)) && (
+        {(audioStored?.id !== audioId ||
+          (audioStored?.id === audioId && !isPlaying)) && (
           <button
             className="rounded-full bg-gray-100 p-2 hover:bg-gray-200"
             aria-label="Play sound"
             onClick={() => {
-              if (audioStored && audioStored?.id !== sound.id.toString()) {
+              if (audioStored && audioStored?.id !== audioId) {
                 audioStored?.pause();
               }
-              if (audioStored?.id === sound.id.toString()) {
+              if (audioStored?.id === audioId) {
                 audioStored?.play();
                 return;
               }
-              const audio = new Audio(sound.url);
-              audio.id = sound.id.toString();
-              setAudio(audio);
+              setCurrentTime(0);
+              setTimeout(() => {
+                const audio = new Audio(sound.url);
+                audio.id = audioId;
+                setAudioStored(audio);
+              }, 100);
             }}
           >
             <svg
@@ -89,12 +104,12 @@ export function SoundItem({ sound }: { sound: Sound }) {
           </button>
         )}
 
-        {audioStored?.id === sound.id.toString() && isPlaying && (
+        {audioStored?.id === audioId && isPlaying && (
           <button
             className="rounded-full bg-gray-100 p-2 hover:bg-gray-200"
             aria-label="Pause sound"
             onClick={() => {
-              if (audioStored?.id === sound.id.toString()) {
+              if (audioStored?.id === audioId) {
                 audioStored?.pause();
               }
             }}
@@ -119,6 +134,25 @@ export function SoundItem({ sound }: { sound: Sound }) {
         <button
           className="rounded-full bg-gray-100 p-2 hover:bg-gray-200"
           aria-label="Download sound"
+          onClick={() => {
+            const downloadSound = async () => {
+              try {
+                const response = await fetch(sound.url);
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = downloadUrl;
+                link.download = sound.title;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(downloadUrl);
+              } catch (error) {
+                console.error("Error downloading sound:", error);
+              }
+            };
+            downloadSound();
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

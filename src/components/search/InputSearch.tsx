@@ -27,10 +27,7 @@ export function InputSearch({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={clsx("relative shadow-md", className)}
-    >
+    <form onSubmit={handleSubmit} className={clsx("relative", className)}>
       <input
         type="text"
         value={searchQuery.tukhoa || ""}
@@ -39,7 +36,7 @@ export function InputSearch({
           setFocus(true);
         }}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-gray-300 px-4 py-2 pr-10 focus:border-gray-500 focus:outline-none"
+        className="w-full rounded-lg border border-gray-300 px-4 py-2 pr-10 shadow-md focus:border-gray-500 focus:outline-none"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onKeyDown={(e) => {

@@ -7,7 +7,7 @@ export function Pagination(props: ReactPaginateProps) {
     <ReactPaginate
       {...props}
       breakLabel="..."
-      pageRangeDisplayed={5}
+      pageRangeDisplayed={3}
       marginPagesDisplayed={2}
       previousLabel={
         <div className="pagination_el rotate-180">

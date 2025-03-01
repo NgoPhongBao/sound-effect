@@ -4,7 +4,7 @@ export const sounds: Sound[] = [
   {
     id: 1,
     title: "Oh no no no no",
-    duration: "0:15",
+    duration: 10.06,
     plays: 1500000,
     downloads: 250000,
     category: { id: 1, name: "Nhạc nền" },
@@ -13,7 +13,7 @@ export const sounds: Sound[] = [
   {
     id: 2,
     title: "Into the night",
-    duration: "0:30",
+    duration: 6.01,
     plays: 890000,
     downloads: 120000,
     category: { id: 2, name: "Nhạc game" },
@@ -22,7 +22,7 @@ export const sounds: Sound[] = [
   {
     id: 3,
     title: "Emotional damage",
-    duration: "0:05",
+    duration: 10.06,
     plays: 2100000,
     downloads: 450000,
     category: { id: 3, name: "Âm thanh thiên nhiên" },
@@ -31,12 +31,66 @@ export const sounds: Sound[] = [
   {
     id: 4,
     title: "Running in the 90s",
-    duration: "0:20",
+    duration: 10.06,
     plays: 750000,
     downloads: 95000,
     category: { id: 4, name: "Tiếng động vật" },
     url: "/gophim.mp3",
   },
+  {
+    id: 5,
+    title: "Running in the 90s",
+    duration: 10.06,
+    plays: 750000,
+    downloads: 95000,
+    category: { id: 4, name: "Tiếng động vật" },
+    url: "/gophim.mp3",
+  },
+  // {
+  //   id: 6,
+  //   title: "Running in the 90s",
+  //   duration: 10.06,
+  //   plays: 750000,
+  //   downloads: 95000,
+  //   category: { id: 4, name: "Tiếng động vật" },
+  //   url: "/gophim.mp3",
+  // },
+  // {
+  //   id: 7,
+  //   title: "Running in the 90s",
+  //   duration: 10.06,
+  //   plays: 750000,
+  //   downloads: 95000,
+  //   category: { id: 4, name: "Tiếng động vật" },
+  //   url: "/gophim.mp3",
+  // },
+  // {
+  //   id: 8,
+  //   title: "Running in the 90s",
+  //   duration: 10.06,
+  //   plays: 750000,
+  //   downloads: 95000,
+  //   category: { id: 4, name: "Tiếng động vật" },
+  //   url: "/gophim.mp3",
+  // },
+  // {
+  //   id: 9,
+  //   title: "Running in the 90s",
+  //   duration: 10.06,
+  //   plays: 750000,
+  //   downloads: 95000,
+  //   category: { id: 4, name: "Tiếng động vật" },
+  //   url: "/gophim.mp3",
+  // },
+  // {
+  //   id: 10,
+  //   title: "Running in the 90s",
+  //   duration: 10.06,
+  //   plays: 750000,
+  //   downloads: 95000,
+  //   category: { id: 4, name: "Tiếng động vật" },
+  //   url: "/gophim.mp3",
+  // },
 ];
 
 export const categories: Category[] = [
@@ -52,7 +106,6 @@ export const categories: Category[] = [
   { id: 10, name: "Âm thanh thể thao" },
 ];
 
-
 export const PATHS = {
   home: "/",
   searchResults: "/ket-qua-tim-kiem",
@@ -63,4 +116,10 @@ export const PATHS = {
   admin: "/admin",
   adminCategories: "/admin/categories",
   adminSounds: "/admin/sounds",
+  viral: "/am-thanh-viral",
+  new: "/am-thanh-moi",
+};
+
+export const PAGINATION = {
+  pageSize: 10,
 };

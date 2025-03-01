@@ -1,7 +1,7 @@
 export interface Sound {
   id: number;
   title: string;
-  duration: string;
+  duration: number;
   plays: number;
   downloads: number;
   category: Category;
