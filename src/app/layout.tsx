@@ -15,14 +15,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const supabase = await createClientServerSide();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [{ data: { user } }, { data: categories }] = await Promise.all([
+    supabase.auth.getUser(),
+    supabase.from("categories").select("*").order("priority", { ascending: false })
+  ]);
 
   return (
     <html lang="en">
       <body className="container">
-        <AppProvider user={user}>
+        <AppProvider user={user} categories={categories}>
           <Layout>{children}</Layout>
         </AppProvider>
       </body>

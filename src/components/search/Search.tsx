@@ -8,16 +8,11 @@ import { PATHS } from "@/constants";
 import { useSearchParams } from "next/navigation";
 import { toQueryString } from "@/helpers";
 import { useRouter } from "next/navigation";
-
-export function Search({
-  className,
-  categories,
-}: {
-  categories: Category[];
-  className?: string;
-}) {
+import { useAppContext } from "@/AppContext";
+export function Search({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { categories } = useAppContext();
   const [searchQuery, setSearchQuery] = useState<SearchQuery>({
     tukhoa: "",
     theloai: "",
@@ -49,7 +44,7 @@ export function Search({
         }}
       />
       <div className="mt-4 flex flex-wrap gap-2">
-        {categories.map((category) => {
+        {categories?.map((category) => {
           const isActive = searchQuery.theloai === category.id.toString();
           let href = `${PATHS.searchResults}?${toQueryString({
             ...searchQuery,
