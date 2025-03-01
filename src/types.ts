@@ -9,6 +9,9 @@ export interface Sound {
   created_at: string;
   updated_at: string;
   is_deleted: boolean;
+  is_viral: boolean;
+  is_trending: boolean;
+  is_new: boolean;
 }
 
 export interface Category {

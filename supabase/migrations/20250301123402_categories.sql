@@ -18,6 +18,10 @@ values
 
 alter table categories enable row level security;
 
+-- Allow authenticated users to select categories
+create policy "Public categories are viewable by everyone." on categories
+  for select using (true);
+
 -- Allow authenticated users to create categories
 create policy "Enable insert for authenticated users only" 
 on categories for insert 
