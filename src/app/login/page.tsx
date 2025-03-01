@@ -1,5 +1,5 @@
 import LoginForm from "./login-form";
-import { createClientServerSide } from "@/lib/supabase/server";
+import { createClientServerSide } from "@/supabase/server";
 import { redirect } from "next/navigation";
 export default async function Account() {
   const supabase = await createClientServerSide();

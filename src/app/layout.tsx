@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/globals.scss";
 import Layout from "@/layout";
-import { createClientServerSide } from "@/lib/supabase/server";
+import { createClientServerSide } from "@/supabase/server";
 import AppProvider from "@/AppContext";
 
 export const metadata: Metadata = {
