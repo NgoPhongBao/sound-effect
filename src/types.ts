@@ -6,11 +6,18 @@ export interface Sound {
   downloads: number;
   category: Category;
   url: string;
+  created_at: string;
+  updated_at: string;
+  is_deleted: boolean;
 }
 
 export interface Category {
   id: number;
   name: string;
+  priority: number;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface User {

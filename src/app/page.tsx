@@ -1,10 +1,10 @@
 import { SoundList, Search } from "@/components";
 import { sounds } from "@/constants";
-import { createClientBrowserSide } from "@/supabase/client";
+import { createClientServerSide } from "@/supabase/server";
 import { PATHS } from "@/constants";
 
 export default async function Home() {
-  const supabase = await createClientBrowserSide();
+  const supabase = await createClientServerSide();
   const { data: categories } = await supabase.from("categories").select();
 
   return (
