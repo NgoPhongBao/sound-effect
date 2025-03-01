@@ -15,6 +15,8 @@ export default function CategoriesPage() {
   const [page, setPage] = useState(0);
   const [count, setCount] = useState(0);
   const [categoryEdit, setCategoryEdit] = useState<Category | null>(null);
+  const [categoryDelete, setCategoryDelete] = useState<Category | null>(null);
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -65,6 +67,14 @@ export default function CategoriesPage() {
     }
   };
 
+  const handleDelete = async () => {
+    const supabase = await createClientBrowserSide();
+    await supabase.from("categories").delete().eq("id", categoryDelete?.id);
+    fetchCategories(page);
+    toast.success("Xóa thành công");
+    setCategoryDelete(null);
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-end">
@@ -99,7 +109,10 @@ export default function CategoriesPage() {
                   >
                     Sửa
                   </button>
-                  <button className="rounded bg-red-500 px-2 py-1 text-sm text-white hover:bg-red-600">
+                  <button
+                    className="rounded bg-red-500 px-2 py-1 text-sm text-white hover:bg-red-600"
+                    onClick={() => setCategoryDelete(category)}
+                  >
                     Xóa
                   </button>
                 </div>
@@ -122,6 +135,11 @@ export default function CategoriesPage() {
         }}
         categoryEdit={categoryEdit || undefined}
         onSubmit={handleSubmit}
+      />
+      <DeleteConfirmModal
+        isOpen={!!categoryDelete}
+        onClose={() => setCategoryDelete(null)}
+        onConfirm={handleDelete}
       />
     </>
   );
@@ -228,6 +246,48 @@ function CreateCategoryForm({
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  );
+}
+
+function DeleteConfirmModal({
+  isOpen,
+  onClose,
+  onConfirm,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black/[30%]">
+      <div className="w-full max-w-md rounded-lg bg-white p-6">
+        <h3 className="text-lg font-medium">Xác nhận xóa</h3>
+        <p className="mt-2 text-gray-600">
+          Bạn có chắc chắn muốn xóa thể loại này không?
+        </p>
+        <div className="mt-4 flex justify-end gap-2">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300"
+          >
+            Hủy
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onConfirm();
+              onClose();
+            }}
+            className="rounded-lg bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600"
+          >
+            Xóa
+          </button>
+        </div>
       </div>
     </div>
   );

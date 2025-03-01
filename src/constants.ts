@@ -13,6 +13,4 @@ export const PATHS = {
   new: "/am-thanh-moi",
 };
 
-export const PAGINATION = {
-  pageSize: 10,
-};
+export const PAGE_SIZE = 10;

@@ -1,19 +1,36 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { Search, SoundItem } from "@/components";
-import { PATHS } from "@/constants";
+import { PATHS, PAGE_SIZE } from "@/constants";
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { toQueryString } from "@/helpers";
 import { Pagination } from "@/components";
 import { useAppContext } from "@/AppContext";
+import { Sound } from "@/types";
 
-export default function TimKiemPage() {
+
+export default function SeacrhResult({
+  sounds,
+  count,
+}: {
+  sounds: Sound[];
+  count: number;
+}) {
   const searchParams = useSearchParams();
   const tukhoa = searchParams.get("tukhoa") || "";
   const theloai = searchParams.get("theloai") || "";
+  const trang = searchParams.get("trang")
+    ? Number(searchParams.get("trang")) - 1
+    : 0;
+
   const router = useRouter();
   const { categories } = useAppContext();
+
+  const handlePageChange = (selectedItem: { selected: number }) => {
+    // fetchCategories(selectedItem.selected);
+  };
+
   return (
     <>
       <Search className="mt-4" />
@@ -92,11 +109,15 @@ export default function TimKiemPage() {
             </div>
 
             <div className="mt-4 space-y-2">
-              {/* {[].map((sound) => (
+              {sounds.length > 0 ? sounds.map((sound) => (
                 <SoundItem key={sound.id} sound={sound} />
-              ))} */}
+              )) : <div className="text-center text-gray-500 mb-4">Không tìm thấy kết quả</div>}
             </div>
-            <Pagination pageCount={10} />
+            <Pagination
+              pageCount={Math.ceil(count / PAGE_SIZE)}
+              forcePage={trang}
+              onPageChange={handlePageChange}
+            />
           </section>
         </Suspense>
       </div>
