@@ -4,7 +4,7 @@ export interface Sound {
   duration: number;
   plays: number;
   downloads: number;
-  category: Category;
+  category: number;
   url: string;
   created_at: string;
   updated_at: string;
@@ -14,6 +14,7 @@ export interface Sound {
   is_new: boolean;
 }
 
+export interface SoundUpdatePayload extends Partial<Sound> {}
 export interface Category {
   id: number;
   name: string;

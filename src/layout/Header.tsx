@@ -95,7 +95,7 @@ export default function Header() {
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="hover:text-gray-300"
+            className="hover:text-gray-300 p-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
