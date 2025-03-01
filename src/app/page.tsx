@@ -1,6 +1,6 @@
 import { SoundList, Search } from "@/components";
 import { sounds } from "@/constants";
-import { createClientServerSide } from "@/supabase/server";
+import { createClientServerSide } from "@/lib/supabase/server";
 import { PATHS } from "@/constants";
 
 export default async function Home() {

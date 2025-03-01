@@ -1,4 +1,4 @@
-import { createClientServerSide } from "@/supabase/server";
+import { createClientServerSide } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 

@@ -1,7 +1,7 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { type NextRequest, NextResponse } from "next/server";
 import { PATHS } from "@/constants";
-import { createClientServerSide } from "@/supabase/server";
+import { createClientServerSide } from "@/lib/supabase/server";
 
 // Creating a handler to a GET request to route /auth/confirm
 export async function GET(request: NextRequest) {
