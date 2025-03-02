@@ -1,7 +1,8 @@
 import { SoundListWithPagination } from "@/components";
 import { createClientServerSide } from "@/supabase/server";
 import { PAGE_SIZE, PATHS } from "@/constants";
-export default async function AmThanhViralPage({
+
+export default async function XuHuongPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -13,17 +14,17 @@ export default async function AmThanhViralPage({
   const { data: sounds, count } = await supabase
     .from("sounds")
     .select("*", { count: "exact" })
-    .eq("is_viral", true)
+    .eq("is_trending", true)
     .order("downloads", { ascending: false })
     .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
 
   return (
     <>
       <SoundListWithPagination
-        title="Âm thanh viral"
+        title="Xu hướng"
         sounds={sounds || []}
         count={count || 0}
-        link={PATHS.viral}
+        link={PATHS.xuHuong}
       />
     </>
   );

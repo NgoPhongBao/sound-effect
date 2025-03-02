@@ -7,7 +7,7 @@ import { Sound, SoundUpdatePayload } from "@/types";
 import clsx from "clsx";
 import { toast } from "react-toastify";
 import { useAppContext } from "@/AppContext";
-import { getFile } from "@/helpers";
+import { formatTime, getFile } from "@/helpers";
 const PAGE_SIZE = 10;
 
 export default function SoundsPage() {
@@ -29,7 +29,8 @@ export default function SoundsPage() {
     const { data: sounds, count } = await supabase
       .from("sounds")
       .select("*", { count: "exact" })
-      .range(_page * PAGE_SIZE, _page * PAGE_SIZE + PAGE_SIZE - 1);
+      .range(_page * PAGE_SIZE, _page * PAGE_SIZE + PAGE_SIZE - 1)
+      .order("created_at", { ascending: false });
     setSounds(sounds || ([] as Sound[]));
     setCount(count || 0);
   };
@@ -161,7 +162,7 @@ export default function SoundsPage() {
                         Trending
                       </label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         checked={sound.is_new}
@@ -177,7 +178,7 @@ export default function SoundsPage() {
                       <label htmlFor="is_new" className="text-sm">
                         Mới
                       </label>
-                    </div>
+                    </div> */}
                   </div>
                 </td>
                 <td className="px-4 py-2">
@@ -292,6 +293,9 @@ function CreateSoundForm({
       ...values,
       path: filePath,
     });
+    resetForm();
+  };
+  const resetForm = () => {
     setValues({
       title: "",
       duration: 0,
@@ -346,7 +350,8 @@ function CreateSoundForm({
                     File: {file.name}
                   </p>
                   <p className="mt-2 text-xs text-gray-500">
-                    Thời lượng: {values.duration}s
+                    Thời lượng:{" "}
+                    {values.duration ? formatTime(values.duration) : "00:00"}
                   </p>
                   <audio
                     src={URL.createObjectURL(file)}
@@ -377,7 +382,7 @@ function CreateSoundForm({
             <textarea
               id="title"
               placeholder="Nhập tên âm thanh"
-              value={file?.name || values.title}
+              value={values.title}
               onChange={(e) => setValues({ ...values, title: e.target.value })}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               required
@@ -408,7 +413,10 @@ function CreateSoundForm({
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => {
+                resetForm();
+                onClose();
+              }}
               className="rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
             >
               Hủy
@@ -451,7 +459,7 @@ function DeleteConfirmModal({
       <div className="w-full max-w-md rounded-lg bg-white p-6">
         <h3 className="text-lg font-medium">Xác nhận xóa</h3>
         <p className="mt-2 text-gray-600">
-          Bạn có chắc chắn muốn xóa thể loại này không?
+          Bạn có chắc chắn muốn xóa âm thanh này không?
         </p>
         <div className="mt-4 flex justify-end gap-2">
           <button

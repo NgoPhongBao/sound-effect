@@ -70,7 +70,7 @@ export function SoundItem({ sound }: { sound: Sound }) {
   };
 
   return (
-    <div className="flex items-center justify-between rounded-lg border px-3 py-2 hover:bg-gray-50">
+    <div className="flex items-center justify-between gap-4 rounded-lg border px-3 py-2 hover:bg-gray-50">
       {/* sound info */}
       <div>
         <h3 className="font-medium break-all">{sound.title}</h3>

@@ -21,7 +21,7 @@ export function Pagination(props: ReactPaginateProps) {
       }
       renderOnZeroPageCount={null}
       className="mt-4 flex justify-center gap-2"
-      activeClassName="!text-blue-500 !border-blue-500 font-[500]"
+      activeClassName="!border-2 !border-black font-bold"
       pageClassName="pagination_el"
       disabledClassName="pagination_el_disabled"
     />

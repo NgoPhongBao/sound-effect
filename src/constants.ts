@@ -11,6 +11,7 @@ export const PATHS = {
   adminSounds: "/admin/sounds",
   viral: "/am-thanh-viral",
   new: "/am-thanh-moi",
+  xuHuong: "/xu-huong",
 };
 
 export const PAGE_SIZE = 10;

@@ -9,7 +9,6 @@ import { Pagination } from "@/components";
 import { useAppContext } from "@/AppContext";
 import { Sound } from "@/types";
 
-
 export default function SeacrhResult({
   sounds,
   count,
@@ -28,7 +27,13 @@ export default function SeacrhResult({
   const { categories } = useAppContext();
 
   const handlePageChange = (selectedItem: { selected: number }) => {
-    // fetchCategories(selectedItem.selected);
+    router.push(
+      `${PATHS.searchResults}?${toQueryString({
+        tukhoa,
+        theloai,
+        trang: selectedItem.selected + 1,
+      })}`,
+    );
   };
 
   return (
@@ -109,14 +114,27 @@ export default function SeacrhResult({
             </div>
 
             <div className="mt-4 space-y-2">
-              {sounds.length > 0 ? sounds.map((sound) => (
-                <SoundItem key={sound.id} sound={sound} />
-              )) : <div className="text-center text-gray-500 mb-4">Không tìm thấy kết quả</div>}
+              {sounds.length > 0 ? (
+                sounds.map((sound) => (
+                  <SoundItem key={sound.id} sound={sound} />
+                ))
+              ) : (
+                <div className="mb-4 text-center text-gray-500">
+                  Không tìm thấy kết quả
+                </div>
+              )}
             </div>
             <Pagination
               pageCount={Math.ceil(count / PAGE_SIZE)}
               forcePage={trang}
               onPageChange={handlePageChange}
+              hrefBuilder={(page) =>
+                `${PATHS.searchResults}?${toQueryString({
+                  tukhoa,
+                  theloai,
+                  trang: page,
+                })}`
+              }
             />
           </section>
         </Suspense>
