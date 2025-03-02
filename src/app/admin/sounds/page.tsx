@@ -268,19 +268,6 @@ function CreateSoundForm({
     }
   }, [soundEdit]);
 
-  useEffect(() => {
-    if (file) {
-      const audio = new Audio(URL.createObjectURL(file));
-      audio.addEventListener("loadedmetadata", () => {
-        setValues({
-          ...values,
-          duration: Math.round(audio.duration),
-          title: file.name,
-        });
-      });
-    }
-  }, [file]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const supabase = await createClientBrowserSide();
@@ -369,6 +356,14 @@ function CreateSoundForm({
                   const file = e.target.files?.[0];
                   if (file) {
                     setFile(file);
+                    const audio = new Audio(URL.createObjectURL(file));
+                    audio.addEventListener("loadedmetadata", () => {
+                      setValues({
+                        ...values,
+                        duration: Math.round(audio.duration),
+                        title: file.name,
+                      });
+                    });
                   }
                 }}
               />
