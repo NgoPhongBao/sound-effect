@@ -32,23 +32,21 @@ export default async function TimKiemPage({
     <>
       <SeacrhResult sounds={sounds || []} count={count || 0} />
 
-      {sounds && sounds.length === 0 && (
+      {/* {sounds && sounds.length === 0 && (
         <>
-          {/* Âm thanh viral */}
           <SoundList
             title="Âm thanh viral"
             sounds={sounds || []}
             link={PATHS.viral}
           />
 
-          {/* Âm thanh mới */}
           <SoundList
             title="Âm thanh mới"
             sounds={sounds || []}
             link={PATHS.new}
           />
         </>
-      )}
+      )} */}
     </>
   );
 }
