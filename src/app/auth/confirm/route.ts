@@ -5,7 +5,7 @@ import { createClientServerSide } from "@/supabase/server";
 
 // Creating a handler to a GET request to route /auth/confirm
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.path);
+  const { searchParams } = new URL(request.url);
   const token_hash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
   const next = PATHS.admin;

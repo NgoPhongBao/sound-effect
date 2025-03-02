@@ -4,7 +4,7 @@ import { PAGE_SIZE, PATHS } from "@/constants";
 export default async function AmThanhMoiPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: any;
 }) {
   const { trang = "" } = await searchParams;
   const page = trang ? Number(trang) - 1 : 0;

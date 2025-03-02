@@ -5,7 +5,7 @@ import { SoundList } from "@/components";
 export default async function TimKiemPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: any;
 }) {
   const { theloai = "", tukhoa = "", trang = "" } = await searchParams;
   const page = trang ? Number(trang) - 1 : 0;
