@@ -53,6 +53,7 @@ export function InputSearch({
           onSearch?.();
           setFocus(false);
         }}
+        aria-label="Tìm kiếm"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
