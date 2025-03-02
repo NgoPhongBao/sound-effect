@@ -7,6 +7,7 @@ import AppProvider from "@/AppContext";
 export const metadata: Metadata = {
   title: "Kho âm thanh miễn phí",
   description: "Kho âm thanh miễn phí",
+  robots: "noindex, nofollow",
 };
 
 export default async function RootLayout({
