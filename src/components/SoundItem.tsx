@@ -2,6 +2,9 @@
 import { Sound } from "@/types";
 import { useState, useEffect, useId } from "react";
 import { formatTime, getFile } from "@/helpers";
+import { createClientBrowserSide } from "@/supabase/client";
+
+const EVENT_PLAY_SOUND = "playSound";
 
 export function SoundItem({ sound }: { sound: Sound }) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
@@ -13,6 +16,11 @@ export function SoundItem({ sound }: { sound: Sound }) {
   useEffect(() => {
     if (audio) {
       audio.play();
+      document.dispatchEvent(
+        new CustomEvent(EVENT_PLAY_SOUND, {
+          detail: { id: audioId },
+        }),
+      );
       audio.addEventListener("timeupdate", () => {
         setCurrentTime(audio.currentTime);
       });
@@ -34,6 +42,33 @@ export function SoundItem({ sound }: { sound: Sound }) {
     };
   }, [audio]);
 
+  useEffect(() => {
+    document.addEventListener(EVENT_PLAY_SOUND, (event: any) => {
+      if (audio && !audio.paused && event.detail.id !== audio.id) {
+        audio.pause();
+        setTimeout(() => {
+          audio.currentTime = 0;
+        }, 100);
+      }
+    });
+  }, [audio]);
+
+  const handleDownloadSound = async () => {
+    const file = await getFile(sound.path);
+    const downloadUrl = window.URL.createObjectURL(file!);
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = sound.title;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(downloadUrl);
+    const supabase = createClientBrowserSide();
+    await supabase.rpc("increment_downloads", {
+      sound_id: sound.id,
+    });
+  };
+
   return (
     <div className="flex items-center justify-between rounded-lg border px-3 py-2 hover:bg-gray-50">
       {/* sound info */}
@@ -44,7 +79,18 @@ export function SoundItem({ sound }: { sound: Sound }) {
           tải
         </p>
         <div className="mt-1 flex items-center gap-2">
-          <div className="h-1 w-[110px] rounded-full bg-gray-200">
+          <div
+            className="h-[6px] w-[110px] rounded-full bg-gray-200"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const _currentTime = (x / rect.width) * sound.duration;
+              setCurrentTime(_currentTime);
+              if (audio) {
+                audio.currentTime = _currentTime;
+              }
+            }}
+          >
             <div
               className="h-full rounded-full bg-gray-800 transition-all duration-200"
               style={{
@@ -74,6 +120,11 @@ export function SoundItem({ sound }: { sound: Sound }) {
                 });
               } else {
                 audio.play();
+                document.dispatchEvent(
+                  new CustomEvent(EVENT_PLAY_SOUND, {
+                    detail: { id: audioId },
+                  }),
+                );
               }
             }}
           >
@@ -123,24 +174,7 @@ export function SoundItem({ sound }: { sound: Sound }) {
         <button
           className="rounded-full bg-gray-100 p-2 hover:bg-gray-200"
           aria-label="Download sound"
-          onClick={() => {
-            const downloadSound = async () => {
-              try {
-                const file = await getFile(sound.path);
-                const downloadUrl = window.URL.createObjectURL(file!);
-                const link = document.createElement("a");
-                link.href = downloadUrl;
-                link.download = sound.title;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(downloadUrl);
-              } catch (error) {
-                console.error("Error downloading sound:", error);
-              }
-            };
-            downloadSound();
-          }}
+          onClick={handleDownloadSound}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

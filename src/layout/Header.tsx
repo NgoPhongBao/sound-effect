@@ -2,8 +2,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-import { useDebounce } from "@uidotdev/usehooks";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { useAppContext } from "@/AppContext";
 import { PATHS } from "@/constants";
@@ -26,13 +25,6 @@ export default function Header() {
     },
     [router],
   );
-
-  // const debouncedSearch = useDebounce(search, 500);
-
-  // useEffect(() => {
-  //   if (debouncedSearch === null) return;
-  //   handleSearch(debouncedSearch);
-  // }, [debouncedSearch, handleSearch]);
 
   return (
     <>
@@ -164,15 +156,6 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Trang chủ
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/the-loai"
-                className="block rounded-lg p-2 hover:bg-gray-100"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Thể loại
               </Link>
             </li>
             {user && (
