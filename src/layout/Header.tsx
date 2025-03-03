@@ -35,19 +35,23 @@ export default function Header() {
       >
         <Link href="/" className="flex items-end">
           <Image
-            src="/logo.png"
+            src="/logo-white.png"
             alt="Logo"
-            width={100}
-            height={100}
-            className="h-6 w-6 object-contain"
+            width={32}
+            height={32}
+            className="h-8 w-8 min-w-8 object-contain sm:hidden"
           />
-          <span className="hidden translate-y-[5px] leading-none font-bold md:inline-block md:text-3xl">
-            hoamthanh.com
-          </span>
+          <Image
+            src="/logo-text.png"
+            alt="Logo"
+            width={200}
+            height={50}
+            className="h-6 w-[200px] object-contain hidden sm:block"
+          />
         </Link>
 
-        <div className="flex items-center gap-2">
-          <div className="relative mx-4 w-[250px] max-w-[400px] flex-1">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <div className="relative w-[220px] sm:w-[250px] max-w-[400px] flex-1">
             <input
               type="text"
               placeholder="Tìm kiếm âm thanh..."
@@ -87,7 +91,7 @@ export default function Header() {
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="hover:text-gray-300 p-2"
+            className="p-1 hover:text-gray-300"
             aria-label="Menu"
           >
             <svg
@@ -96,7 +100,7 @@ export default function Header() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="h-6 w-6"
+              className="h-6 w-6 sm:w-8 sm:h-8"
             >
               <path
                 strokeLinecap="round"

@@ -5,9 +5,21 @@ import { createClientServerSide } from "@/supabase/server";
 import AppProvider from "@/AppContext";
 
 export const metadata: Metadata = {
-  title: "Kho âm thanh miễn phí",
-  description: "Kho âm thanh miễn phí",
+  title: "KhoÂmThanh.com - Kho âm thanh & Sound Effect miễn phí",
+  description: "Chia sẻ kho âm thanh, sound effect miễn phí cho dự án làm phim, edit video của bạn. Các file MP3 tại KhoÂmThanh.com là: ✓ Miễn phí bản quyền ✓ Không cần ghi nguồn",
   robots: "noindex, nofollow",
+  openGraph: {
+    title: "KhoÂmThanh.com - Kho âm thanh & Sound Effect miễn phí",
+    description: "Chia sẻ kho âm thanh, sound effect miễn phí cho dự án làm phim, edit video của bạn. Các file MP3 tại KhoÂmThanh.com là: ✓ Miễn phí bản quyền ✓ Không cần ghi nguồn",
+    url: "https://khoamthanh.com",
+    images: [
+      {
+        url: "https://khoamthanh.com/khoamthanh.com.png",
+        alt: "KhoÂmThanh.com - Kho âm thanh & Sound Effect miễn phí",
+      },
+    ],
+    type: 'website',
+  },
 };
 
 export default async function RootLayout({
