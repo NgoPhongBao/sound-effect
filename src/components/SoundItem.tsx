@@ -14,13 +14,15 @@ export function SoundItem({ sound }: { sound: Sound }) {
   const audioId = useId();
 
   useEffect(() => {
+    getFile(sound.path).then((file) => {
+      const audio = new Audio(URL.createObjectURL(file));
+      audio.id = audioId;
+      setAudio(audio);
+    });
+  }, [sound]);
+
+  useEffect(() => {
     if (audio) {
-      audio.play();
-      document.dispatchEvent(
-        new CustomEvent(EVENT_PLAY_SOUND, {
-          detail: { id: audioId },
-        }),
-      );
       audio.addEventListener("timeupdate", () => {
         setCurrentTime(audio.currentTime);
       });
@@ -112,20 +114,12 @@ export function SoundItem({ sound }: { sound: Sound }) {
             className="rounded-full bg-gray-100 p-2 hover:bg-gray-200"
             aria-label="Play sound"
             onClick={() => {
-              if (!audio) {
-                getFile(sound.path).then((file) => {
-                  const audio = new Audio(URL.createObjectURL(file));
-                  audio.id = audioId;
-                  setAudio(audio);
-                });
-              } else {
-                audio.play();
-                document.dispatchEvent(
-                  new CustomEvent(EVENT_PLAY_SOUND, {
-                    detail: { id: audioId },
-                  }),
-                );
-              }
+              audio!.play();
+              document.dispatchEvent(
+                new CustomEvent(EVENT_PLAY_SOUND, {
+                  detail: { id: audioId },
+                }),
+              );
             }}
           >
             <svg
