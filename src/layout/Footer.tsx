@@ -6,16 +6,27 @@ export default function Footer() {
           <div>
             <h3 className="mb-2 font-medium uppercase md:mb-4">Về chúng tôi</h3>
             <p className="text-gray-300">
-              <strong className="text-white">khoamthanh.com</strong> là nền tảng
-              cung cấp các hiệu ứng âm thanh và bản nhạc chất lượng cao.
+              <a
+                href="https://www.khoamthanh.com"
+                className="text-white font-bold"
+              >
+                khoamthanh.com
+              </a>{" "}
+              là nền tảng cung cấp các hiệu ứng âm thanh miễn phí và chất lượng
+              cao.
             </p>
           </div>
           <div>
             <h3 className="mb-2 font-medium uppercase md:mb-4">Liên hệ</h3>
-            <div className="flex gap-4 text-gray-300">
-              <span>Facebook</span>
-              <span>Twitter</span>
-              <span>Instagram</span>
+            <div>
+              <p>
+                <span className="text-gray-300">SĐT/Zalo:</span>{" "}
+                <a href="tel:0977480791">0977480791</a>
+              </p>
+              <p>
+                <span className="text-gray-300">Email:</span>{" "}
+                <a href="mailto:khoamthanh@gmail.com">khoamthanh@gmail.com</a>
+              </p>
             </div>
           </div>
         </div>
