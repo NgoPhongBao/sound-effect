@@ -3,19 +3,21 @@ import "@/styles/globals.scss";
 import Layout from "@/layout";
 import { createClientServerSide } from "@/supabase/server";
 import AppProvider from "@/AppContext";
+import { DEFAULT_TITLE, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DOMAIN } from "@/constants";
+
 
 export const metadata: Metadata = {
-  title: "KhoÂmThanh.com - Kho âm thanh & Sound Effect miễn phí",
-  description: "Chia sẻ kho âm thanh, sound effect miễn phí cho dự án làm phim, edit video của bạn. Các file MP3 tại KhoÂmThanh.com là: ✓ Miễn phí bản quyền ✓ Không cần ghi nguồn",
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
   robots: "noindex, nofollow",
   openGraph: {
-    title: "KhoÂmThanh.com - Kho âm thanh & Sound Effect miễn phí",
-    description: "Chia sẻ kho âm thanh, sound effect miễn phí cho dự án làm phim, edit video của bạn. Các file MP3 tại KhoÂmThanh.com là: ✓ Miễn phí bản quyền ✓ Không cần ghi nguồn",
-    url: "https://khoamthanh.com",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: DOMAIN,
     images: [
       {
-        url: "https://khoamthanh.com/khoamthanh.com.png",
-        alt: "KhoÂmThanh.com - Kho âm thanh & Sound Effect miễn phí",
+        url: DEFAULT_OG_IMAGE,
+        alt: DEFAULT_TITLE,
       },
     ],
     type: 'website',
