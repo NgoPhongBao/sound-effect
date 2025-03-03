@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/**/*.js": {
-      "regions": ["sin1", "hnd1"]
-    }
-  }
-}
