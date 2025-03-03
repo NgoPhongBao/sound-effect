@@ -2,7 +2,6 @@
 export const PATHS = {
   home: "/",
   searchResults: "/ket-qua-tim-kiem",
-  categories: "/the-loai",
   login: "/login",
   signup: "/signup",
   account: "/account",

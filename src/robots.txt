@@ -1,0 +1,10 @@
+# Allow all robots complete access
+User-agent: *
+Allow: /
+
+# Disallow access to specific folders (uncomment if needed)
+Disallow: /login
+Disallow: /admin/*
+
+# Sitemap location (uncomment and modify if you have one)
+Sitemap: https://www.khoamthanh.com/sitemap.xml
